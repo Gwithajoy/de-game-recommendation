@@ -80,5 +80,22 @@ def get_n_reviews(appid, n=10):
 
     return reviews
         
-
+def get_bundle_info(appid):
+    
+    params = {'json' : 1,
+            'filter' : 'all',
+            'language' : 'english'}
+ 
+    # app ID로 게임 정보 가져오기
+    url = f"https://store.steampowered.com/api/appdetails?appids={appid}"
+    res = requests.get(url, params=params).json()
+    # title 확인
+    res[appid]['data']['name']
+    # 번들 정보 확인
+    res[appid]['data']['dlc']
+    # Don't Starve Together 스팀 페이지에서 
+    # CONTENT FOR THIS GAME 부분에 보면 Browse all (35)라고 표시되어있는것 확인
+    len(res[appid]['data']['dlc'])
+    # 최종 가격도 확인가능
+    res[appid]['data']["price_overview"]['final']/100
 
