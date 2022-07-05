@@ -17,9 +17,9 @@ import pandas as pd
 
 def get_bundle_info(appidlist):
     USER = "admin2"
-    PWD = "1111"
-    HOST = "ec2-54-248-99-240.ap-northeast-1.compute.amazonaws.com"
-    PORT = "27017"
+    PWD = ""
+    HOST = ""
+    PORT = ""
     client = pymongo.MongoClient(f"mongodb://{USER}:{PWD}@{HOST}:{PORT}")
 
     
@@ -35,6 +35,7 @@ def get_bundle_info(appidlist):
     
         # app ID로 게임 정보 가져오기
     for keyid in appidlist:
+        print(keyid)
         url = f"https://store.steampowered.com/api/appdetails?appids={keyid}"
         res = requests.get(url, params=params).json()
         try:
@@ -52,10 +53,10 @@ def get_bundle_info(appidlist):
             final_price.append(price)
         except:
             pass
-        
+    
         db = client['steam']
-        collection = db['steam_test']
+        collection = db['steam_bundle_info']
         doc = {'title': title, 'bundle_info' : other_bundle, 'bundle_count' : count_bundle, 'final_price':price}
         collection.insert_one(doc)
-    
+
 
