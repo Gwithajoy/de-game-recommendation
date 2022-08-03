@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="kr">
+<head>
+    <title>Gentleman's 추천</title>
+</head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color: #fff;
+            user-select: none;
+          }
+        body {
+            background-color: black;
+            background-repeat : no-repeat;
+            background-size: cover;
+          }
+          
+          a {
+            text-decoration: none;
+          }
+          h1 {font-family: cursive;
+             font-style: italic;
+             font-size: 30px; 
+          }
+        section {
+            width: 90%;
+            height: 90%;
+            margin: 0 auto;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2.0em;
+            padding-left: 8.0em;
+            padding-right: 8.0em;
+            background-image: url("../img/bg.jpeg");
+            background-repeat : no-repeat;
+            background-size: cover;
+          }
+          section .content-list {
+            padding-top: 3em;
+            margin-bottom: 3rem;
+            position: relative;
+          }
+          section .content-list h3 {
+            font-size: 34px;
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+            margin-top: 0.5rem;
+            text-align: center;
+          }
+          section .content-list .slider {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: scroll;
+            scroll-behavior: smooth;
+          }
+          section .content-list .slider::-webkit-scrollbar {
+            display: none;
+          }
+          section .content-list .slider .item {
+            min-width: 250px;
+            height: 150px;
+            background: #262626;
+            background: linear-gradient(312deg, #262626 0%, #333333 54%, #2a2a2a 100%);
+            border-radius: 5px;
+          }
+          section .content-list .slider .item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+          section .content-list .prev-arrow {
+            transform: rotateY(180deg);
+          }
+          section .content-list .prev {
+            font-size: 3rem;
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-10px);
+            cursor: pointer;
+          }
+          section .content-list .next {
+            font-size: 3rem;
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-10px);
+            cursor: pointer;
+          }
+          button {
+            background:skyblue;
+            color:white;
+            padding: 15px 30px;
+            font-size:20px;
+            top:20%;
+            left:70%;
+            position:absolute;
+            font-style: italic;
+            }
+            
+      </style>
+<body>
+<section>
+  <div><h1>Gentleman</h1>
+    
+  </div>
+  
+    <div class="content-list" >
+        <h3>여러분이 좋아하는 게임과 비슷한 게임이예요.</h1>
+        <div class="slider" id="recommended-game-wrapper"></div>
+        <div class="prev"><i class="fa-solid fa-angle-right prev-arrow"></i></div>
+        <div class="next"><i class="fa-solid fa-angle-right"></i></div>
+    </div>
+    <div class="content-list">
+        <h3>여러분이 선택하신 게임을 한 유저들이 추천해드려요.</h1>
+        <div class="slider" id="recommended-game-wrapper2"></div>
+        <div class="prev"><i class="fa-solid fa-angle-right prev-arrow"></i></div>
+        <div class="next"><i class="fa-solid fa-angle-right"></i></div>
+    </div>
+</section>
+<script>
+    const next = document.querySelectorAll('.next');
+    const prev = document.querySelectorAll('.prev');
+    const slider = document.querySelectorAll('.slider')
+    for(let i =0;i<slider.length;i++){
+        makeSlider(slider[i],prev[i],next[i]);
+    }
+        
+    function makeSlider(element,prev,next){
+        next.addEventListener('click',()=>{
+            const offsetX = element.offsetWidth;
+            element.scrollBy(offsetX,0)
+        })
+        prev.addEventListener('click',()=>{
+            const offsetX = element.offsetWidth;
+            element.scrollBy(-offsetX,0)
+        })
+    }
+
+    const drawGameList = (wrapperId, gameDatas)=>{
+        const wrapper = document.querySelector(wrapperId);
+        
+        gameDatas.forEach((gameData)=>{
+            const cardTemplate =`
+            <div class="item game-poster-wrapper">
+                <a href="/about_this_game/${gameData['appid']}"><img src="${gameData['image_link']}" alt="${gameData['title']}"></a>
+            </div>`;
+            wrapper.innerHTML += cardTemplate;
+        });
+
+     
+        
+    }
+
+    const recommededDataLoad = async ()=>{
+        const result = await fetch(
+            "http://127.0.0.1:5000/api/recommendation/",
+            {
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            body: sessionStorage.getItem("game_list"),
+            method: "POST"}
+        )
+
+        const jsonData = await result.json();
+        const recommendedGameList = jsonData["recomented_games"];
+
+        drawGameList("#recommended-game-wrapper", recommendedGameList);
+
+
+    }
+
+    window.onload = ()=>{
+        recommededDataLoad();
+        recommededDataLoad2();
+    }
+
+    const recommededDataLoad2 = async ()=>{
+        const result = await fetch(
+            "http://127.0.0.1:5000/api/recommendation2/",
+            {
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            body: sessionStorage.getItem("game_list"),
+            method: "POST"}
+        )
+
+        const jsonData = await result.json();
+        const recommendedGameList2 = jsonData["recomented_games2"];
+        
+        drawGameList("#recommended-game-wrapper2", recommendedGameList2);
+
+    }
+</script>
+</body>
+</html> 
+
