@@ -20,21 +20,16 @@ def get_bundle_info(appid):
     HOST = "서버"
     PORT = "포트"
     client = pymongo.MongoClient(f"mongodb://{USER}:{PWD}@{HOST}:{PORT}")
-   
-
-
     
     game_title  = []
     bundles_id = []
     bundles_count= []
     final_price = []
-
-
+    
     params = {'json' : 1,
             'filter' : 'all',
             'language' : 'english'}
     
-
         # app ID로 게임 정보 가져오기
     url = f"https://store.steampowered.com/api/appdetails?appids={appid}"
     res = requests.get(url, params=params).json()
