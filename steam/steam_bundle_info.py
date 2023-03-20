@@ -15,10 +15,10 @@ import traceback
 import pandas as pd
 
 def get_bundle_info(appid):
-    USER = "admin2"
-    PWD = "1111"
-    HOST = "ec2-54-248-99-240.ap-northeast-1.compute.amazonaws.com"
-    PORT = "27017"
+    USER = "유저"
+    PWD = "패스워드"
+    HOST = "서버"
+    PORT = "포트"
     client = pymongo.MongoClient(f"mongodb://{USER}:{PWD}@{HOST}:{PORT}")
    
 
