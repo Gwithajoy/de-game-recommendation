@@ -18,10 +18,10 @@ spark = SparkSession.builder.appName("mart")\
                 .getOrCreate()
 
 # mysql 정보
-HOST = "ec2-54-248-99-240.ap-northeast-1.compute.amazonaws.com"
-DB_USER   = "admin"
-DB_PASSWD = "1111"
-DB_NAME = "gentleman"
+HOST = "ec2-**-248-**-***.ap-********-1.compute.amazonaws.com"
+DB_USER   = "*****"
+DB_PASSWD = "****"
+DB_NAME = "gentl***"
 conn = f"mysql://{DB_USER}:{DB_PASSWD}@{HOST}/{DB_NAME}?charset=utf8"
 
 # 테이블 읽어오기
