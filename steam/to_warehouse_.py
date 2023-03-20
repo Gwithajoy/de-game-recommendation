@@ -10,9 +10,9 @@ def to_mysql_conn(engine):
     '''
         mysql로 engine을 반환하는 함수
 	'''
-    HOST ="ec2-54-248-99-240.ap-northeast-1.compute.amazonaws.com"
-    USER = "admin"
-    PWD= "1111"
+    HOST ="ec2-**-248-**-**0.ap-northeast-1.compute.amazonaws.com"
+    USER = "a***"
+    PWD= "****"
     engine = create_engine(f"mysql+mysqlconnector://{USER}:{PWD}@{HOST}:3306/gentleman")
     return engine
 
