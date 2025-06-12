@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}{{ game.title }}{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="media">
+    {% if game.video_link.endswith('.mp4') %}
+      <video src="{{ game.video_link }}" controls autoplay></video>
+    {% else %}
+      <img src="{{ game.video_link }}" alt="{{ game.title }}">
+    {% endif %}
+  </div>
+  <h2>{{ game.title }}</h2>
+  <ul class="game-meta">
+    <li>출시일: {{ game.release_date }}</li>
+    <li>장르: {{ game.genre }}</li>
+    <li>등급: {{ game.grade }}</li>
+  </ul>
+  <p>{{ game.description }}</p>
+</div>
+{% endblock %}

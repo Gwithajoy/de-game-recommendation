@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Game Selection{% endblock %}
+{% block content %}
+<section>
+  <button id="submit-button" class="btn" disabled>추천받기</button>
+  {% for genre, games in (action_top15, adventure_top15, casual_top15, indie_top15, racing_top15, rpg_top15, simulation_top15, sports_top15, strategy_top15)|zip %}
+  <div class="content-list">
+    <h3>{{ genre.split('_')[0]|capitalize }}</h3>
+    <div class="slider" data-genre="{{ genre }}">
+      {% for g in games %}
+      <div class="item game-poster-wrapper" data-appid="{{ g.appid }}">
+        <img src="{{ g.image_link }}" alt="{{ g.title }}">
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+</section>
+{% endblock %}

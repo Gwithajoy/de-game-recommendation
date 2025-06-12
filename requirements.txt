@@ -1,0 +1,40 @@
+# HTTP & Parsing
+requests>=2.31.0
+fake-useragent>=0.1.11
+scrapy>=2.9.0
+beautifulsoup4>=4.12.0
+
+# MongoDB
+pymongo>=4.3.3
+flask-pymongo>=2.3.0
+
+# SQLAlchemy & MySQL
+SQLAlchemy>=2.0.20
+pymysql>=1.0.3
+mysql-connector-python>=8.1.0
+
+# Flask & related
+Flask>=2.3.2
+Flask-SQLAlchemy>=3.0.3
+gunicorn>=20.1.0
+
+# Selenium
+selenium>=4.9.1
+webdriver-manager>=3.8.6
+
+# Kafka
+kafka-python>=2.0.2
+
+# Data
+pandas>=2.0.3
+numpy>=1.25.0
+
+# Machine Learning / NLP
+gensim>=4.4.0
+
+# Dev / Testing / Linting
+pytest>=7.3.1
+flake8>=6.0.0
+black>=24.3.0
+isort>=5.12.0
+pre-commit>=3.3.3

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+  <div class="hero">
+    <a href="{{ url_for('main.games') }}">
+      <img src="{{ url_for('static', filename='img/cover.jpg') }}" alt="Gentleman">
+    </a>
+  </div>
+{% endblock %}
