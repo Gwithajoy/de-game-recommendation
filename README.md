@@ -97,18 +97,3 @@
    ```
 4. 웹 접속: `http://localhost:5000`
 
-## 9. CI / CD & 테스트
-- **CI**: GitHub Actions (pytest, flake8, docker build)
-- **테스트**:
-  ```bash
-  pytest --disable-warnings -q
-  ```
-
-## 10. 기여
-1. `git checkout -b feat/your-feature`
-2. 코딩 → `flake8`, `black` → 커밋
-3. PR 생성
-
-## 11. 라이선스
-- MIT License
-EOF
